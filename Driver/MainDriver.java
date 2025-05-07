@@ -1,7 +1,8 @@
+import java.io.IOException;
 import java.util.*;
 public class MainDriver {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Scanner sc = new Scanner(System.in);
 

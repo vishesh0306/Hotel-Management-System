@@ -11,16 +11,7 @@ public class HotelManagerServices {
 
 	
 	public static boolean managerLogin(String email, String password) {
-		
-		if (email.matches("^[\\w.-]+@[\\w.-]+\\.\\w+$") == false) {
-		    System.out.println("Invalid email");
-		    return false;
-		}
-		
-		if(password.length() < 3) {
-			System.out.println("Password must have atleast 4 characters");
-			return false;
-		}
+
 		
 		Iterator<HotelManager> managerIterator = HotelDatabase.hotelManagers.iterator();
         

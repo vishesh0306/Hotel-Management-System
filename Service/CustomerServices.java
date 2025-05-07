@@ -53,16 +53,6 @@ public class CustomerServices {
 	
 	public static Customer loginCustomer(String email, String password) {
 		
-		if (email.matches("^[\\w.-]+@[\\w.-]+\\.\\w+$") == false) {
-		    System.out.println("Invalid email");
-		    return null;
-		}
-		
-		if(password.length() < 3) {
-			System.out.println("Password must have atleast 4 characters");
-			return null;
-		}
-		
 		Iterator<Customer> itr = HotelDatabase.customers.iterator();
 
         while(itr.hasNext()) {

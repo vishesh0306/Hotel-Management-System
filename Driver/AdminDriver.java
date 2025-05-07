@@ -1,4 +1,5 @@
 
+import java.io.IOException;
 import java.util.*;
 
 import Service.AdminServices;
@@ -6,7 +7,7 @@ import Service.AdminServices;
 public class AdminDriver {
 
     
-    public static void adminPortal(Scanner scanner) {
+    public static void adminPortal(Scanner scanner) throws IOException {
     	
     	boolean flag = true;
 
@@ -49,7 +50,7 @@ public class AdminDriver {
     
 
 
-	public static void adminDriver(Scanner scanner){
+	public static void adminDriver(Scanner scanner) throws IOException{
 		
 		boolean flag = true;
 		
@@ -124,8 +125,8 @@ public class AdminDriver {
 			
 			case "7" :{
 				
-				System.out.println("Under developement");
-//				AdminServices.generateReport();
+//				System.out.println("Under developement");
+				AdminServices.generateReport();
 				
 			}break;
 			

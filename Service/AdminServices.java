@@ -3,26 +3,19 @@ package Service;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import Database2.HotelDatabase;
 import Entity.Booking;
 import Entity.Customer;
 import Entity.HotelManager;
+import Entity.Room;
 public class AdminServices {
 	
 	
 	
 	public static boolean adminLogin(String email, String password) {
-		
-		if (email.matches("^[\\w.-]+@[\\w.-]+\\.\\w+$") == false) {
-		    System.out.println("Invalid email");
-		    return false;
-		}
-		
-		if(password.length() < 3) {
-			System.out.println("Password must have atleast 4 characters");
-			return false;
-		}
+	
 		
 		if(HotelDatabase.admin.email.equals(email)) {
         	if(HotelDatabase.admin.password.equals(password)) {
@@ -155,12 +148,55 @@ public class AdminServices {
     	
     	File file = new File("Booking Reports.csv");
     	file.createNewFile();
-    	FileWriter fw = new FileWriter(file);
     	
     	
+    	FileWriter fileWriter = new FileWriter(file);
+    	fileWriter.write("Customer name, Customer email, Customer age, Single rooms booked, double rooms booked, triplet rooms booked, Bill\n");
     	
+    	Iterator<Booking> bookingItr = HotelDatabase.bookingHistory.iterator();
+    	
+    	while(bookingItr.hasNext()) {
+    		Booking booking = bookingItr.next();
+    		Customer customer = booking.customer;
+    		String name = customer.name;
+    		int age = customer.age;
+    		String email = customer.email;
+    		
+    		ArrayList<Room> rooms = booking.bookedRooms;
+    		
+    		Iterator<Room> roomItr = rooms.iterator();
+    		int singleRooms = 0;
+    		int doubleRooms = 0;
+    		int tripletRooms = 0;
+    		double price = 0;
+    		
+    		while(roomItr.hasNext()) {
+    			Room r = roomItr.next();
+    			if(r.type.equals("single")){
+    				singleRooms++;
+    				price += Room.singleRoomPrice;
+    			}
+    			else if(r.type.equals("double")){
+    				doubleRooms++;
+    				price += Room.doubleRoomPrice;
+    			}
+    			else if(r.type.equals("triplet")){
+    				tripletRooms++;
+    				price += Room.tripletRoomPrice;
+    			}		
+    		}
+    		
 
-    	System.out.println("Under Developement");
+        	
+        	fileWriter.write(name + "," + email + "," + age + "," + singleRooms + "," + doubleRooms + "," + tripletRooms + "," + price + "\n");
+        	
+    		
+    		
+    	}
+    	
+    	System.out.println("Report generated!!");
+    	fileWriter.close();
+
     	
     }
 
